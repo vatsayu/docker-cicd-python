@@ -27,6 +27,10 @@ jobs:
       - name: Test application
         run: |
           python -m py_compile app.py
+          Python app.py &
+          sleep 5
+          curl --fail http://127.0.0.1:5000/
+          curl --fail http://127.0.0.1:5000/health
 
       - name: Build Docker image
         run: docker build -t devops-python-app:ci .
